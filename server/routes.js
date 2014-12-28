@@ -6,8 +6,15 @@
 
 var errors = require('./components/errors');
 var path = require('path');
+var cors = require('cors');
+
+var corsOptions = {
+  origin: 'http://*.ludic.fr'
+};
 
 module.exports = function(app) {
+
+  app.use(cors());
 
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
