@@ -5,10 +5,10 @@ module.exports = [
 	},
 	{
 		match: '/api/',
-	  replacement: 'http://api.ludic.fr/api/'
+	  replacement: 'http://api.ludiic.fr/api/'
 	},
 	{
 		match: '/auth/',
-	  replacement: 'http://api.ludic.fr/auth/'
+	  replacement: 'http://api.ludiic.fr/auth/'
 	}
 	]
