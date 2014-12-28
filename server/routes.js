@@ -9,12 +9,15 @@ var path = require('path');
 var cors = require('cors');
 
 var corsOptions = {
-  origin: ['*.ludiic.fr'],
+  origin: "http://www.ludiic.fr",
+  credentials: true,
+
 };
 
 module.exports = function(app) {
 
   app.use(cors(corsOptions));
+  app.options('*', cors(corsOptions));
 
   // Insert routes below
   app.use('/api/things', require('./api/thing'));
