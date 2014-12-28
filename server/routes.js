@@ -9,7 +9,7 @@ var path = require('path');
 var cors = require('cors');
 
 var corsOptions = {
-  origin: ['http://*.ludic.fr', 'http://www.ludic.fr', 'http://api.ludic.fr']
+  origin: ['*.ludiic.fr'],
 };
 
 module.exports = function(app) {
