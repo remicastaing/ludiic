@@ -10,5 +10,11 @@ module.exports = [
 	{
 		match: '/auth/',
 	  replacement: 'http://api.ludiic.fr/auth/'
+	},
+		{
+		match: 'script src=',
+	  replacement: 'script async src='
 	}
 	]
+
+	

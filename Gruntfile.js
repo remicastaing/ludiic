@@ -19,6 +19,7 @@ module.exports = function (grunt) {
     buildcontrol: 'grunt-build-control',
     istanbul_check_coverage: 'grunt-mocha-istanbul',
     replace: 'grunt-replace',
+    compress: 'grunt-contrib-compress'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -409,6 +410,23 @@ module.exports = function (grunt) {
       }
     },
 
+
+    // compress app.css, app.js and vendor.js
+
+    compress: {
+      main: {
+        options: {
+          mode: 'gzip'
+        },
+        files: [
+          {expand: true, cwd: '<%= yeoman.dist %>/client/app/', src: ['*.*'], dest:'<%= yeoman.dist %>/client/gz/'},
+          {expand: true, cwd: '<%= yeoman.dist %>/client/', src: ['*.html'], dest:'<%= yeoman.dist %>/client/gz/'},
+          //{expand: true, cwd: '<%= yeoman.dist %>/client/app/', src: ['*.vendor.js'], dest:'gz/', ext: '.vendor.js'},
+          //{expand: true, cwd: '<%= yeoman.dist %>/client/app/', src: ['*.app.css'], dest:'gz/',  ext: '.app.css'},
+        ]
+      }
+    },
+
     buildcontrol: {
       options: {
         dir: 'dist',
@@ -787,7 +805,8 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'replace'
+    'replace',
+    'compress'
   ]);
 
   grunt.registerTask('default', [

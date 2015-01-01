@@ -7,9 +7,15 @@
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+if (process.env.NODE_ENV==='production') {
+	require('newrelic');
+};
+
 var express = require('express');
 var mongoose = require('mongoose-bird')();
 var config = require('./config/environment');
+
+
 
 // Connect to MongoDB
 mongoose.connect(config.mongo.uri, config.mongo.options);
