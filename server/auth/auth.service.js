@@ -30,7 +30,7 @@ function isAuthenticated() {
       User.findByIdAsync(req.user._id)
         .then(function(user) {
           if (!user) {
-            return res.send(401);
+            return res.status(401).end();
           }
           req.user = user;
           next();
@@ -57,7 +57,7 @@ function hasRole(roleRequired) {
         next();
       }
       else {
-        res.send(403);
+        res.status(403).end();
       }
     });
 }
@@ -65,8 +65,9 @@ function hasRole(roleRequired) {
 /**
  * Returns a jwt token signed by the app secret
  */
-function signToken(id) {
-  return jwt.sign({ _id: id }, config.secrets.session, {
+function signToken(id, role) {
+  var payload = { _id: id, role : role };
+  return jwt.sign(payload, config.secrets.session, {
     expiresInMinutes: 60 * 5
   });
 }
@@ -74,18 +75,42 @@ function signToken(id) {
 /**
  * Set token cookie directly for oAuth strategies
  */
-function setTokenCookie(req, res) {
+function setToken(req, res) {
   if (!req.user) {
     return res.json(404, {
       message: 'Something went wrong, please try again.'
     });
   }
+  //console.log(req.user[0]);
   var token = signToken(req.user._id, req.user.role);
-  res.cookie('token', JSON.stringify(token));
-  res.redirect('/');
+  res.redirect('/login/'+token);
 }
 
+function verifyRequestToken(secret, enabled) {
+  enabled = (arguments.length >= 2) ? enabled : true;
+  return function(req, res, next) {
+    if (!enabled) { return next(); }
+    
+    if (!req.query.token && (!req.body || !req.body.token)) { return res.status(401).send('no token supplied'); }
+    var token = req.query.token || req.body.token;
+    jwt.verify(token, secret, function(err, obj) {
+      if (err) { return res.status(401).send('there was an error with the supplied token'); }
+      if (req.body) {
+        delete req.body.token;
+        console.log(obj);
+        for (var k in obj) {
+          if (k !== 'iat') req.body[k] = obj[k];
+        }
+      } else {
+        req.body = obj;
+      }
+      next();
+    });
+  };
+};
+
+exports.verifyRequestToken = verifyRequestToken;
 exports.isAuthenticated = isAuthenticated;
 exports.hasRole = hasRole;
 exports.signToken = signToken;
-exports.setTokenCookie = setTokenCookie;
+exports.setToken = setToken;

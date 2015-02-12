@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('ludiicApp')
-  .controller('LoginCtrl', function($scope, Auth, $state, $window) {
+  .controller('LoginCtrl', function($scope, Auth, $state, $stateParams, $window) {
     $scope.user = {};
     $scope.errors = {};
+
+
+    if ($stateParams.sessionToken) {
+      Auth.setSessionToken($stateParams.sessionToken, function(){$state.go('main');});
+    }
 
     $scope.login = function(form) {
       $scope.submitted = true;

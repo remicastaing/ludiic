@@ -20,6 +20,7 @@ module.exports = function(app) {
   app.options('*', cors(corsOptions));
 
   // Insert routes below
+  app.use('/api/test', require('./api/test'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 

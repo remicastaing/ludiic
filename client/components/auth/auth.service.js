@@ -60,7 +60,38 @@ angular.module('ludiicApp')
        * @return {Promise}
        */
       createUser: function(user, callback) {
-        return User.save(user,
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+
+        $http.post('/api/users/', user).
+        success(function(data) {
+          $cookieStore.put('token', data.token);
+          currentUser = User.get();
+          deferred.resolve(data);
+          return cb();
+        }).
+        error(function(err) {
+          deferred.reject(err);
+          return cb(err);
+        }.bind(this));
+
+        return deferred.promise;
+      },
+
+
+      /**
+       * Confirm mail
+       *
+       * @param  {String}   token
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      confirmMail: function(token, callback) {
+
+
+        return User.confirmEmail({
+          token: token
+        },
           function(data) {
             $cookieStore.put('token', data.token);
             currentUser = User.get();
@@ -88,6 +119,49 @@ angular.module('ludiicApp')
           return safeCb(callback)(null, user);
         }, function(err) {
           return safeCb(callback)(err);
+        }).$promise;
+      },
+
+      /**
+       * Send Reset password Mail
+       *
+       * @param  {String}   email address
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      sendPwdResetMail: function(email, callback) {
+        var cb = callback || angular.noop;
+        console.log('email :'+email);
+        return User.resetpassword({
+          email: email
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
+       * Change reseted password
+       *
+       * @param  {String}   pwdresetToken
+       * @param  {String}   newPassword
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      changeResetedPassword: function(pwdresetToken, newPassword, callback) {
+        var cb = callback || angular.noop;
+        console.log('pwdresetToken: '+ pwdresetToken);
+
+        return User.changeResetedPassword({
+          token: pwdresetToken,
+          newPassword: newPassword
+        }, function(data) {
+          $cookieStore.put('token', data.token);
+          currentUser = User.get();
+          return cb(data);
+        }, function(err) {
+          return cb(err);
         }).$promise;
       },
 
@@ -161,6 +235,19 @@ angular.module('ludiicApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      },
+
+      /**
+       * Set session token
+       *
+       * @param  {String}   session token
+       * @return {Promise}
+       */
+      setSessionToken: function(sessionToken, callback) {
+        var cb = callback || angular.noop;
+        $cookieStore.put('token', sessionToken);
+        currentUser = User.get(cb);
       }
+
     };
   });

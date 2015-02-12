@@ -17,6 +17,24 @@ angular.module('ludiicApp')
         params: {
           id:'me'
         }
+      },
+      confirmEmail: {
+        method: 'post',
+        params: {
+          controller : 'confirmEmail'
+        }
+      },
+      resetpassword: {
+        method: 'POST',
+        params: {
+          controller:'resetpassword'
+        }
+      },
+      changeResetedPassword: {
+        method: 'POST',
+        params: {
+          controller:'changeResetedPassword'
+        }
       }
 	  });
   });

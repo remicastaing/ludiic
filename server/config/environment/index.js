@@ -26,7 +26,17 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'ludiic-secret'
+    session: 'ludiic-secret',
+    verify: 'mail-support-verify-secret',
+    account: 'mail-support-account-secret'
+  },
+
+  // User account options
+  userAccounts: {
+    verifyNewEmail: true,
+    verifyEmailCallbackURL: (process.env.DOMAIN || '') + '/confirm',
+    passwordReset: true,
+    passwordResetCallbackURL: (process.env.DOMAIN || '') + '/changepassword'
   },
 
   // List of user roles
@@ -46,6 +56,28 @@ var all = {
     clientSecret: process.env.FACEBOOK_SECRET || 'secret',
     callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
   },
+
+  mail: {
+    // default from address
+    fromAddress: 'mailSupport <mailSupportApp@example.com>',
+
+    // default mail transport
+    transport: 'smtp-transport',
+
+    // transport configurations
+    transports: {
+      /**
+       * @see https://github.com/andris9/nodemailer-smtp-transport#usage
+       */
+      'smtp-transport': {
+        service: 'mailgun',
+        auth: {
+          user: process.env.SMTP_TRANSPORT_USER || 'username2',
+          pass: process.env.SMTP_TRANSPORT_PASS || 'password'
+        }
+      }
+    }
+  }
 
 };
 

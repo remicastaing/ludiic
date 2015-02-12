@@ -13,13 +13,25 @@ var UserSchema = new Schema({
   },
   role: {
     type: String,
-    default: 'user'
+    default: 'guest'
   },
   password: String,
-  provider: String,
   salt: String,
-  facebook: {},
-  github: {}
+  verified : { type: Boolean, default: false },
+
+  local: { type: Boolean, default: true },
+  facebook : {
+    type: Schema.Types.Mixed,
+    "default": {verified: false}
+  },
+  google: {
+    type: Schema.Types.Mixed,
+    "default": {verified: false}
+  },
+  twitter: {
+    type: Schema.Types.Mixed,
+    "default": {verified: false}
+  },
 });
 
 /**
@@ -70,12 +82,16 @@ UserSchema
     return password.length;
   }, 'Password cannot be blank');
 
-// Validate email is not taken
+//Validate email is not taken
 UserSchema
   .path('email')
   .validate(function(value, respond) {
     var self = this;
-    return this.constructor.findOneAsync({ email: value })
+    console.log(this);
+    if (!this.local) {
+      return respond(true);
+    }
+    return this.constructor.findOneAsync({ email: value, local: true })
       .then(function(user) {
         if (user) {
           if (self.id === user.id) {
@@ -124,6 +140,35 @@ UserSchema
       next();
     }
   });
+
+/**
+ * Pre-save hook
+ */
+UserSchema
+  .pre('save', function(next) {
+    var _this = this;
+    if (this.verified) {
+      this.constructor.findOne(
+      {
+        _id : {$ne: this._id},
+        email: this.email,
+        verified : true
+      }, 
+      function(err, verifiedUser){
+        if (verifiedUser) {
+          _this.mergeUserTo(verifiedUser, next);
+        } 
+        else{
+          next();
+        }; 
+      });      
+    } 
+    else{
+      next();
+    };
+    
+});
+
 
 /**
  * Methods
@@ -220,7 +265,37 @@ UserSchema.methods = {
       }
       return callback(null, key.toString('base64'));
     });
-  }
+  },
+
+
+  /**
+   * Merge a user to another user 
+   *
+   * @param {Object} user
+   * @param {Function} callback
+   * @api public
+   */
+
+    mergeUserTo: function(user, next){
+      this.name = user.name;
+      this.role = user.role;
+      if (user.local) {
+        this.password = user.password;
+        this.salt = user.salt;
+        this.role = true;
+      }
+
+      if (user.facebook.verified) {
+        this.facebook = user.facebook;
+      }
+
+      if (user.google.verified) {
+        this.google = this.google;
+      }
+      user.remove();
+      next();
+    }
+
 };
 
 module.exports = mongoose.model('User', UserSchema);

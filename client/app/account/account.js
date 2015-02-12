@@ -6,8 +6,10 @@ angular.module('ludiicApp')
       .state('login', {
         url: '/login',
         templateUrl: 'app/account/login/login.html',
-        controller: 'LoginCtrl'
       })
+      .state('loginWithToken', {
+        url: '/login/:sessionToken',
+        templateUrl: 'app/account/login/login.html',      })
       .state('logout', {
         url: '/logout?referrer',
         referrer: 'main',
@@ -23,7 +25,6 @@ angular.module('ludiicApp')
       .state('signup', {
         url: '/signup',
         templateUrl: 'app/account/signup/signup.html',
-        controller: 'SignupCtrl'
       })
       .state('settings', {
         url: '/settings',
