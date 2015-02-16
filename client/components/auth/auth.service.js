@@ -131,7 +131,6 @@ angular.module('ludiicApp')
        */
       sendPwdResetMail: function(email, callback) {
         var cb = callback || angular.noop;
-        console.log('email :'+email);
         return User.resetpassword({
           email: email
         }, function(user) {
@@ -151,7 +150,6 @@ angular.module('ludiicApp')
        */
       changeResetedPassword: function(pwdresetToken, newPassword, callback) {
         var cb = callback || angular.noop;
-        console.log('pwdresetToken: '+ pwdresetToken);
 
         return User.changeResetedPassword({
           token: pwdresetToken,

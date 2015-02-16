@@ -17,7 +17,6 @@ angular.module('ludiicApp')
         $scope.pwdResetMailSend = true;
         Auth.sendPwdResetMail( $scope.reset.email )
         .then( function() {
-          console.log('ok');
           $scope.email.to = $scope.reset.email;
           $state.go('pwdreset.mailsent');
         })
@@ -39,7 +38,6 @@ angular.module('ludiicApp')
         })
         .catch( function(err) {
           //form.password.$setValidity('mongoose', false);
-          console.log(err);
           $scope.invalidResetCode = true;
           $scope.message = '';
         });

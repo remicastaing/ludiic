@@ -87,7 +87,6 @@ UserSchema
   .path('email')
   .validate(function(value, respond) {
     var self = this;
-    console.log(this);
     if (!this.local) {
       return respond(true);
     }

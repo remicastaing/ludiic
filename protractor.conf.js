@@ -31,6 +31,8 @@ var config = {
   // https://code.google.com/p/selenium/wiki/DesiredCapabilities
   // and
   // https://code.google.com/p/selenium/source/browse/javascript/webdriver/capabilities.js
+  
+  directConnect: true,
   capabilities: {
     'browserName': 'chrome',
     'name': 'Fullstack E2E',

@@ -5,6 +5,7 @@ describe('Directive: signup', function () {
   // load the directive's module and view
   beforeEach(module('ludiicApp'));
   beforeEach(module('components/signup/signup.html'));
+  beforeEach(module('app/main/main.html'));
 
   var element, scope;
 
@@ -16,6 +17,6 @@ describe('Directive: signup', function () {
     element = angular.element('<signup></signup>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the signup directive');
+    expect(element.text()).to.contain('Sign up');
   }));
 });

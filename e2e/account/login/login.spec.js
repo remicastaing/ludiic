@@ -1,6 +1,6 @@
 'use strict';
 
-var config = protractor.getInstance().params;
+var config = browser.params;
 var UserModel = require(config.serverConfig.root + '/server/api/user/user.model');
 
 describe('Login View', function() {
