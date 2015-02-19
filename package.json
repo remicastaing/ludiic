@@ -29,7 +29,6 @@
     "nodemailer": "^1.3.0",
     "email-templates": "remicastaing/node-email-templates",
     "nodemailer-stub-transport": "latest",
-    "node-sass": "^1.2.3",
     "glob": "^4.0.0"
   },
   "devDependencies": {
