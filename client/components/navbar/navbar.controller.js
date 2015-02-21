@@ -2,10 +2,10 @@
 
 angular.module('ludiicApp')
   .controller('NavbarCtrl', function ($scope, Auth) {
-    $scope.menu = [{
-      'title': 'Home',
-      'state': 'main'
-    }];
+    // $scope.menu = [{
+    //   'title': 'Accueil',
+    //   'state': 'main'
+    // }];
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;

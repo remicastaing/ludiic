@@ -9,11 +9,11 @@ angular.module('ludiicApp')
       if (form.$valid) {
         Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
           .then(function() {
-            $scope.message = 'Password successfully changed.';
+            $scope.message = 'Votre mot de passe a été changé avec sucès.';
           })
           .catch(function() {
             form.password.$setValidity('mongoose', false);
-            $scope.errors.other = 'Incorrect password';
+            $scope.errors.other = 'Mot de passe incorrect.';
             $scope.message = '';
           });
       }

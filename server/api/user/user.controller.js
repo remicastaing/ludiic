@@ -148,7 +148,6 @@ exports.sendEmailVerification = function(req, res, next) {
 
   mailer.sendMail({
     to: user.email,
-    subject: 'Verify your email address',
     name: userName,
     signature : 'Rémi',
     footer: false,
@@ -190,7 +189,8 @@ exports.sendPasswordReset = function(req, res, next) {
   if (!req.body || !req.body.email) { return res.status(400).send('no email supplied'); }
 
   User.findOneAsync({
-    email: req.body.email.toLowerCase()
+    email: req.body.email.toLowerCase(),
+    local: true
   })
     .then(function(user) {
       if (!user) {
@@ -205,7 +205,6 @@ exports.sendPasswordReset = function(req, res, next) {
 
       mailer.sendMail({
         to: req.body.email,
-        subject: 'Reset your password',
         name: userName,
         signature: 'Rémi',
         footer: false,
@@ -214,7 +213,7 @@ exports.sendPasswordReset = function(req, res, next) {
         template: 'reset-password'
       }, function(err) {
         if (err) { return res.status(500).send(); }
-        return next();
+        return res.status(200).send();;
       });
     })
     .catch(function(err) {

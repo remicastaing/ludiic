@@ -6,3 +6,7 @@ public
 client/bower_components
 dist
 /server/config/local.env.js
+haltmongo.sh
+startmongo.sh
+ludic.sublime-project
+ludic.sublime-workspace

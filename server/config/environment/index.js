@@ -59,7 +59,7 @@ var all = {
 
   mail: {
     // default from address
-    fromAddress: 'mailSupport <mailSupportApp@example.com>',
+    fromAddress: process.env.FROM_ADDRESS ||'mailSupport <mailSupportApp@example.com>',
 
     // default mail transport
     transport: 'smtp-transport',
