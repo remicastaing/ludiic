@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ludiicApp')
-  .factory('Auth', function Auth($http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($http, User, ludiicStore, $q) {
     /**
      * Return a callback or noop function
      *
@@ -14,7 +14,7 @@ angular.module('ludiicApp')
 
     currentUser = {};
 
-    if ($cookieStore.get('token')) {
+    if (ludiicStore.get('token')) {
       currentUser = User.get();
     }
 
@@ -33,7 +33,7 @@ angular.module('ludiicApp')
           password: user.password
         })
         .then(function(res) {
-          $cookieStore.put('token', res.data.token);
+          ludiicStore.set('token', res.data.token);
           currentUser = User.get();
           safeCb(callback)();
           return res.data;
@@ -48,7 +48,7 @@ angular.module('ludiicApp')
        * Delete access token and user info
        */
       logout: function() {
-        $cookieStore.remove('token');
+        ludiicStore.remove('token');
         currentUser = {};
       },
 
@@ -65,7 +65,7 @@ angular.module('ludiicApp')
 
         $http.post('/api/users/', user).
         success(function(data) {
-          $cookieStore.put('token', data.token);
+          ludiicStore.set('token', data.token);
           currentUser = User.get();
           deferred.resolve(data);
           return cb();
@@ -93,7 +93,7 @@ angular.module('ludiicApp')
           token: token
         },
           function(data) {
-            $cookieStore.put('token', data.token);
+            ludiicStore.set('token', data.token);
             currentUser = User.get();
             return safeCb(callback)(null, user);
           },
@@ -155,7 +155,7 @@ angular.module('ludiicApp')
           token: pwdresetToken,
           newPassword: newPassword
         }, function(data) {
-          $cookieStore.put('token', data.token);
+          ludiicStore.set('token', data.token);
           currentUser = User.get();
           return cb(data);
         }, function(err) {
@@ -232,7 +232,7 @@ angular.module('ludiicApp')
        * @return {String} - a token string used for authenticating
        */
       getToken: function() {
-        return $cookieStore.get('token');
+        return ludiicStore.get('token');
       },
 
       /**
@@ -243,7 +243,7 @@ angular.module('ludiicApp')
        */
       setSessionToken: function(sessionToken, callback) {
         var cb = callback || angular.noop;
-        $cookieStore.put('token', sessionToken);
+        ludiicStore.set('token', sessionToken);
         currentUser = User.get(cb);
       }
 

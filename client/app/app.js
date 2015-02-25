@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('ludiicApp', [
-  'ngCookies',
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap'
+  'angular-storage',
 ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -19,14 +18,14 @@ angular.module('ludiicApp', [
 
   })
 
-  .factory('authInterceptor', function($rootScope, $q, $cookieStore, $injector) {
+  .factory('authInterceptor', function($rootScope, $q, ludiicStore, $injector) {
     var state;
     return {
       // Add authorization token to headers
       request: function(config) {
         config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+        if (ludiicStore.get('token')) {
+          config.headers.Authorization = 'Bearer ' + ludiicStore.get('token');
         }
         return config;
       },
@@ -36,7 +35,7 @@ angular.module('ludiicApp', [
         if (response.status === 401) {
           (state || (state = $injector.get('$state'))).go('login');
           // remove any stale tokens
-          $cookieStore.remove('token');
+          ludiicStore.remove('token');
           return $q.reject(response);
         }
         else {
