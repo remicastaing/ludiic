@@ -34,9 +34,10 @@ describe('Logout View', function() {
 
     it('should logout a user and redirecting to "/"', function() {
       var navbar = require('../../components/navbar/navbar.po');
-
-      browser.getLocationAbsUrl().should.eventually.equal(config.baseUrl + '/');
-      navbar.navbarAccountGreeting.getText().should.eventually.equal('Hello ' + testUser.name);
+      browser.ignoreSynchronization = true;
+      browser.waitForAngular();
+      browser.getLocationAbsUrl().should.eventually.equal('/');
+      navbar.navbarAccountGreeting.getText().should.eventually.equal('Bonjour ' + testUser.name);
 
       browser.get('/logout');
 
