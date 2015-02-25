@@ -7,7 +7,7 @@ var mailer = require('./../../mailer');
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    res.send(statusCode, err);
+    res.status(statusCode).send(err);
   };
 }
 

@@ -67,7 +67,7 @@ exports.show = function(req, res, next) {
   User.findByIdAsync(userId)
     .then(function(user) {
       if (!user) {
-        return res.send(404);
+        return res.status(404).end();
       }
       res.json(user.profile);
     })
@@ -102,7 +102,7 @@ exports.changePassword = function(req, res, next) {
           .then(respondWith(res, 200))
           .catch(validationError(res));
       } else {
-        return res.send(403);
+        return res.status(403).end();
       }
     });
 };
@@ -115,7 +115,7 @@ exports.me = function(req, res, next) {
 
   User.findOneAsync({ _id: userId }, '-salt -hashedPassword')
     .then(function(user) { // don't ever give out the password or salt
-      if (!user) { return res.json(401); }
+      if (!user) { return res.status(401).end(); }
       res.json(user);
     })
     .catch(function(err) {
@@ -194,7 +194,7 @@ exports.sendPasswordReset = function(req, res, next) {
   })
     .then(function(user) {
       if (!user) {
-        return res.send(404);
+        return res.status(404).end();
       }
 
       var token = jwt.sign({ _id: user._id }, config.secrets.account, {

@@ -77,7 +77,7 @@ function signToken(id, role) {
  */
 function setToken(req, res) {
   if (!req.user) {
-    return res.json(404, {
+    return res.status(404).json({
       message: 'Something went wrong, please try again.'
     });
   }

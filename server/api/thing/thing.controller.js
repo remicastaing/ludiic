@@ -15,7 +15,7 @@ var Thing = require('./thing.model');
 function handleError(res, statusCode) {
   statusCode = statusCode || 500;
   return function(err) {
-    res.send(statusCode, err);
+    res.status(statusCode).end(err);
   };
 }
 
