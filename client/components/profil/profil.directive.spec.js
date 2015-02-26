@@ -1,11 +1,10 @@
 'use strict';
 
-describe('Directive: navbar', function () {
+describe('Directive: profil', function () {
 
   // load the directive's module and view
   beforeEach(module('ludiicApp'));
-  beforeEach(module('components/navbar/navbar.html'));
-  beforeEach(module('components/logo/logo.html'));
+  beforeEach(module('components/profil/profil.html'));
   beforeEach(module('app/main/main.html'));
 
   var element, scope;
@@ -15,9 +14,9 @@ describe('Directive: navbar', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<navbar></navbar>');
+    element = angular.element('<profil></profil>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).to.contain('Ludiic');
+    expect(element.text()).to.contain('Profil');
   }));
 });

@@ -12,6 +12,7 @@ router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
+router.put('/:id/profil', auth.isAuthenticated(), controller.changeProfil);
 router.post('/resetpassword', controller.sendPasswordReset);
 router.post('/changeResetedPassword', auth.verifyRequestToken(config.secrets.account), controller.changeResetedPassword);
 router.post('/confirmEmail', auth.verifyRequestToken(config.secrets.verify), controller.confirmEmail, controller.sendToken);

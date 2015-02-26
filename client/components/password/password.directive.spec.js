@@ -5,6 +5,7 @@ describe('Directive: password', function () {
   // load the directive's module and view
   beforeEach(module('ludiicApp'));
   beforeEach(module('components/password/password.html'));
+  beforeEach(module('app/main/main.html'));
 
   var element, scope;
 
@@ -16,6 +17,6 @@ describe('Directive: password', function () {
     element = angular.element('<password></password>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the password directive');
+    expect(element.text()).to.contain('Sauvegarder');
   }));
 });

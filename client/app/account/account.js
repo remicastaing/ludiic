@@ -26,10 +26,10 @@ angular.module('ludiicApp')
         url: '/signup',
         templateUrl: 'app/account/signup/signup.html',
       })
-      .state('settings', {
-        url: '/settings',
-        templateUrl: 'app/account/settings/settings.html',
-        controller: 'SettingsCtrl',
+      .state('password', {
+        url: '/mot_de_passe',
+        templateUrl: 'app/account/password/password.html',
+        controller: 'PasswordCtrl',
         authenticate: true
       });
   })

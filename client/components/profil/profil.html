@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-sm-12">
+      <h1>Profil de {{user.name}}</h1>
+    </div>
+    <div class="col-sm-12">
+      <form class="form" name="form" ng-submit="updateProfil(form)" novalidate>
+
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
+                                            'has-error': form.name.$invalid && submitted }">
+          <label>Nom</label>
+
+          <input type="text" name="name" class="form-control" ng-model="profil.name"
+                 required/>
+          <p class="help-block" ng-show="form.name.$error.required && submitted">
+            Un nom est nécessaire
+          </p>
+        </div>
+
+
+
+        <div>
+          <button class="btn btn-inverse btn-lg btn-register" type="submit">
+            Sauvegarder
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+  <hr>

@@ -20,8 +20,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Se connecter</a></li>
         <li ng-show="isLoggedIn()"><p class="navbar-text user-name">Bonjour {{ getCurrentUser().name }}</p> </li>
-        <li ng-show="isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+        <li ng-show="isLoggedIn()" ui-sref-active="active"><a ui-sref="profil"><span class="glyphicon glyphicon-cog"> Profil</span></a></li>
+        <li ng-show="isLoggedIn()"><a ui-sref="logout"><span class="glyphicon glyphicon-log-out"> Se déconnecter</a></li>
       </ul>
     </div>
   </div>

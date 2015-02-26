@@ -242,3 +242,23 @@ exports.changeResetedPassword= function(req, res, next) {
     .catch( handleError(res, 403) );
 
 };
+
+/**
+ * Update profil part
+ */
+exports.changeProfil = function(req, res, next) {
+  var userId = req.user._id;
+
+  User.findByIdAsync(userId)
+    .then(function(user) {
+      if (!user) {return res.status(403).end();}
+
+      var name = String(req.body.name);
+
+      if (name) {user.name = name;}
+
+      return user.saveAsync()
+          .then(respondWith(res, 200))
+          .catch(validationError(res));
+    });
+};

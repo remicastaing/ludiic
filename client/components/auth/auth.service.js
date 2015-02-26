@@ -245,7 +245,36 @@ angular.module('ludiicApp')
         var cb = callback || angular.noop;
         ludiicStore.set('token', sessionToken);
         currentUser = User.get(cb);
-      }
+      },
+
+           /**
+       * Change profil
+       *
+       * @param  {json}   profil
+       * @param  {Function} callback    - optional, function(error, user)
+       * @return {Promise}
+       */
+      updateProfil: function(profil, callback) {
+        return User.updateProfil({ id: currentUser._id }, 
+          profil, 
+          function(user) {
+          return safeCb(callback)(null, user);
+        }, function(err) {
+          return safeCb(callback)(err);
+        }).$promise;
+      },
+
+            /**
+       * Gets all available info on a user
+       *   (synchronous|asynchronous)
+       *
+       * @param  {Function|*} callback - optional, funciton(user)
+       * @return {Object|Promise}
+       */
+      refreshCurrentUser: function(callback) {
+
+        return currentUser = User.get();
+      },
 
     };
   });

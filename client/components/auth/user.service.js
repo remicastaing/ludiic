@@ -35,6 +35,12 @@ angular.module('ludiicApp')
         params: {
           controller:'changeResetedPassword'
         }
-      }
+      },
+      updateProfil: {
+        method: 'PUT',
+        params: {
+          controller:'profil'
+        }
+      },
 	  });
   });

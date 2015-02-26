@@ -17,6 +17,6 @@ describe('Directive: signup', function () {
     element = angular.element('<signup></signup>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).to.contain('Sign up');
+    expect(element.text()).to.contain('Créer un compte');
   }));
 });

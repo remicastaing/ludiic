@@ -5,6 +5,7 @@ describe('Directive: logo', function () {
   // load the directive's module and view
   beforeEach(module('ludiicApp'));
   beforeEach(module('components/logo/logo.html'));
+  beforeEach(module('app/main/main.html'));
 
   var element, scope;
 
@@ -16,6 +17,7 @@ describe('Directive: logo', function () {
     element = angular.element('<logo></logo>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the logo directive');
+    //expect(element.text()).toBe('Ludiic');
+    expect(element.text()).to.contain('Ludiic');
   }));
 });
