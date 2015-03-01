@@ -83,7 +83,7 @@ function setToken(req, res) {
   }
   //console.log(req.user[0]);
   var token = signToken(req.user._id, req.user.role);
-  res.redirect('/login/'+token);
+  res.redirect(config.clientDomain + '/login/'+token);
 }
 
 function verifyRequestToken(secret, enabled) {
