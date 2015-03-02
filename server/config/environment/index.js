@@ -36,9 +36,9 @@ var all = {
   // User account options
   userAccounts: {
     verifyNewEmail: true,
-    verifyEmailCallbackURL: (process.env.DOMAIN || '') + '/confirm',
+    verifyEmailCallbackURL: (process.env.CLIENT_DOMAIN || '') + '/confirm',
     passwordReset: true,
-    passwordResetCallbackURL: (process.env.DOMAIN || '') + '/changepassword'
+    passwordResetCallbackURL: (process.env.CLIENT_DOMAIN || '') + '/changepassword'
   },
 
   // List of user roles
