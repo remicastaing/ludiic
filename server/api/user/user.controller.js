@@ -200,7 +200,7 @@ exports.sendPasswordReset = function(req, res, next) {
       var token = jwt.sign({ _id: user._id }, config.secrets.account, {
         expiresInMinutes: 60
       });
-      var resetCallback = config.userAccounts.passwordResetCallbackURL + '?token=' + token;
+      var resetCallback = config.userAccounts.passwordResetCallbackURL + '?code=' + token;
       var userName = req.body.name || 'mailSupport user';
 
       mailer.sendMail({

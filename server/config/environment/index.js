@@ -38,7 +38,7 @@ var all = {
     verifyNewEmail: true,
     verifyEmailCallbackURL: (process.env.CLIENT_DOMAIN || '') + '/confirm',
     passwordReset: true,
-    passwordResetCallbackURL: (process.env.CLIENT_DOMAIN || '') + '/changepassword'
+    passwordResetCallbackURL: (process.env.CLIENT_DOMAIN || '') + '/pwdreset'
   },
 
   // List of user roles
