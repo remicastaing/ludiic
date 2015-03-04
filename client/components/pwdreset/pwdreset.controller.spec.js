@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: PwdresetCtrl', function () {
+describe('Controller: PwdResetCtrl', function () {
 
   // load the controller's module
   beforeEach(module('ludiicApp'));
@@ -10,12 +10,12 @@ describe('Controller: PwdresetCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    PwdresetCtrl = $controller('PwdresetCtrl', {
+    PwdresetCtrl = $controller('PwdResetCtrl', {
       $scope: scope
     });
   }));
 
   it('should ...', function () {
-    expect(1).toEqual(1);
+    //expect(1).toEqual(1);
   });
 });
