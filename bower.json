@@ -12,7 +12,8 @@
     "angular-ui-router": "0.2.13",
     "a0-angular-storage": "0.0.9",
     "angular": "1.4.0-beta.5",
-    "angular-resource": "1.4.0-build.3874+sha.ddc6120"
+    "angular-resource": "1.4.0-build.3874+sha.ddc6120",
+    "components-font-awesome": "~4.3.0"
   },
   "devDependencies": {
     "angular-mocks": "~1.3",
