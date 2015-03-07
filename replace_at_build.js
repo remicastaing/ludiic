@@ -14,6 +14,10 @@ module.exports = [
 		{
 		match: 'script src=',
 	  replacement: 'script async src='
+	},
+	{
+		match: 'hjid:21388',
+		replacement: 'hjid:14237'
 	}
 	]
 
