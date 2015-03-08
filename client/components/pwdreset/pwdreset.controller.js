@@ -5,62 +5,51 @@ angular.module('ludiicApp')
 
     var ctrl = this;
 
-    ctrl.errors = {};
-    ctrl.isLoggedIn = Auth.isLoggedIn;
+    
+    ctrl.pwdResetState = 'mailform';
+
+
+    var _resetform = {};
+    var _newPasswordForm = {};
+
     var pwdresetCode = $stateParams.code;
-    var pwdResetState = 'mailform';
-    ctrl.pwdResetMailSend = false;
-    ctrl.invalidResetCode = false;
-    ctrl.unknownMailAddress = false;
-
-
-
     if (pwdresetCode) {
-      pwdResetState = 'passwordform';
+      ctrl.pwdResetState = 'passwordform';
     }
 
 
-    ctrl.sendPwdResetMail = function(form) {
-
-    
-      ctrl.submitted = true;
-      ctrl.unknownMailAddress = false;
-      if(form.$valid) {
-        ctrl.pwdResetMailSend = true;
+    ctrl.sendPwdResetMail = function(resetform) {
+      _resetform = resetform;
+      if(_resetform.$valid) {
+        _resetform.submitted = true;
         Auth.sendPwdResetMail( ctrl.email )
         .then( function() {
-          pwdResetState = 'mailsent';
-          ctrl.message = 'Password successfully changed.';
+          ctrl.pwdResetState = 'mailsent';
         })
         .catch( function(err) {
-          ctrl.unknownMailAddress = true;
-          ctrl.message = '';
-          ctrl.pwdResetMailSend = false;
+          _resetform.email.$setValidity('unknownMailAddress', false);
+          _resetform.submitted = false;
         });
       }
     };
 
-    ctrl.changeResetedPassword = function(form) {
-      console.log('sent');
-      ctrl.submitted = true;
-      if(form.$valid) {
+    ctrl.changeResetedPassword = function(newPasswordForm) {
+      _newPasswordForm = newPasswordForm;
+      if(_newPasswordForm.$valid) {
+        _newPasswordForm.submitted = true;
         Auth.changeResetedPassword( pwdresetCode, ctrl.newPassword )
         .then( function() {
-          ctrl.message = 'Password successfully changed.';
           $state.go('main');
         })
         .catch( function(err) {
-          //form.password.$setValidity('mongoose', false);
-          console.log(err);
-          ctrl.invalidResetCode = true;
-          ctrl.message = '';
+          _newPasswordForm.newPassword.$setValidity('invalidResetCode', false);
         });
       }
     };
 
 
     ctrl.resetStateIs = function(state) {
-      return pwdResetState===state;
+      return ctrl.pwdResetState===state;
     };
 
 

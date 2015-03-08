@@ -6,6 +6,7 @@ angular.module('ludiicApp')
       templateUrl: 'components/password/password.html',
       restrict: 'EA',
       controller: 'PasswordCtrl',
+      controllerAs: 'pwdctrl',
       link: function (scope, element, attrs) {
       }
     };

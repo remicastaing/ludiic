@@ -2,78 +2,92 @@
   <div class="row" >
     <div class="col-sm-12">
       <h1>Mot de passe oublié?</h1>
-      <p>Saisissez votre adresse mail</p>
+
     </div>
     <div class="col-sm-12">
-      <form class="form" name="resetform" ng-submit="ctrl.sendPwdResetMail(resetform)" novalidate>
+      <form class="form-horizontal" name="resetform" ng-submit="ctrl.sendPwdResetMail(resetform)" novalidate>
 
-        <div class="form-group">
-          <label>Adresse mail</label>
+        <div class="form-group" ng-class="{ 'has-success': resetform.email.$valid && resetform.email.$touched,
+        'has-error': resetform.email.$invalid && resetform.email.$touched }">
+        <label for="email" class="col-sm-3 control-label">Adresse mail</label>
 
+        <div class="col-sm-9">
+          <input id="email"  type="email" name="email" class="form-control" ng-model="ctrl.email" placeholder="Saisissez votre adresse mail"
+          required
+          mongoose-error/>
+          
 
-          <input type="email" name="email" class="form-control" ng-model="ctrl.email"
-                 required
-                 mongoose-error/>
+          <div ng-messages="resetform.email.$error" class="help-block"  ng-show="resetform.email.$touched">
+            <div ng-message="email">
+              Cela ne ressemble pas à une adresse mail valide.
+            </div>
+            <div ng-message="required">
+              Quelle est votre adresse mail?
+            </div>
+            <div ng-message="unknownMailAddress">
+              Cette adresse mail est inconnue. Veuillez vérifier et essayer à nouveau.
+            </div>
+          </div>
         </div>
 
+      </div>
 
-        <div class="form-group has-error">
-          <p class="help-block" ng-show="resetform.email.$error.email && submitted">
-            Cela ne ressemble pas à une adresse mail valide.
-          </p>
-          <p class="help-block" ng-show="resetform.email.$error.required && submitted">
-             Quelle est votre adresse mail?
-          </p>
-          <p class="help-block">{{ ctrl.errors.other }}</p>
-        </div>
 
-        <div class="help-block" ng-show="ctrl.unknownMailAddress">
-          <p>Cette adresse mail est inconnue. Veuillez vérifier et essayer à nouveau.</p>
-        </div>
-
-        <div class="col-sm-6">
-          <button class="btn btn-inverse btn-lg btn-primary" ng-disabled="ctrl.pwdResetMailSend" type="submit">
-            Envoyez
+      <div class="form-group">
+        <div class="col-sm-9 col-md-offset-3">
+          <button class="btn btn-primary btn-lg btn-block" ng-disabled="resetform.submitted" type="submit">
+            Envoyez.
           </button>
         </div>
+      </div>
 
 
-      </form>
-    </div>
+    </form>
   </div>
-  <hr>
+</div>
+<hr>
 </div>
 
 <div  ng-show="ctrl.resetStateIs('mailsent')">
   <div class="alert alert-success" role="alert">
-  <h1>Presque sauvé!</h1>
-  <p>Un mail a été envoyé à <b>{{ctrl.email}}</b> avec des instructions pour réinitialiser votre mot de passe. </b>.</p>
-  <p>Veuillez regarder dans votre boite de réception.</p>
+    <h1>Presque sauvé!</h1>
+    <p>Un mail a été envoyé à <b>{{ctrl.email}}</b> avec des instructions pour réinitialiser votre mot de passe. </b>.</p>
+    <p>Veuillez regarder dans votre boite de réception.</p>
   </div>
 </div>
 
 <div ng-show="ctrl.resetStateIs('passwordform')">
   <h1>Changement de mot de passe</h1>
   <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="ctrl.changeResetedPassword(form)" novalidate>
+    <form class="form-horizontal" name="form" ng-submit="ctrl.changeResetedPassword(form)" novalidate>
 
-        <div class="form-group">
-          <label>New Password</label>
-
-          <input type="password" name="newPassword" class="form-control" ng-model="ctrl.newPassword"
-                 ng-minlength="3"
-                 required/>
-          <p class="help-block"
-             ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+      <div class="form-group" ng-class="{ 'has-success': form.newPassword.$valid && form.newPassword.$touched,
+      'has-error': form.newPassword.$invalid && form.newPassword.$touched }">
+      <label for="password" class="col-sm-3 control-label">New Password</label>
+      <div class="col-sm-9">
+        <input id = "password" type="password" name="newPassword" class="form-control" ng-model="ctrl.newPassword" placeholder="Saisissez un nouveau mot de passe"
+        ng-minlength="3"
+        required/>
+        <div ng-messages="form.newPassword.$error" class="help-block"  ng-show="form.newPassword.$touched">
+          <div ng-message="minlength">
             Votre mot de passe doit faire plus de 3 caractères.
-          </p>
+          </div>
+          <div ng-message="required">
+            Un mot de passe est nécessaire.
+          </div>
+          <div ng-message="invalidResetCode">
+            <p>La réinitialisation du mot de passe a échoué.</p>
+            <p>Cliquer à nouveau sur le bouton "réinitialiser" dans le message vous avez reçu ou recommencez <pwdresetlink>ici</pwdresetlink></p>
+          </div>
         </div>
-
-        <div class="help-block" ng-show="ctrl.invalidResetCode">
-          <p>La réinitialisation du mot de passe a échoué.</p>
-          <p>Cliquer à nouveau sur le bouton "réinitialiser" dans le message vous avez reçu ou recommencez <pwdresetlink>ici</pwdresetlink></p>
+      </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9 col-md-offset-3">
+          <button class="btn btn-primary btn-lg btn-block" ng-disabled="resetform.submitted" type="submit">
+            Envoyez
+          </button>
         </div>
-
-        <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
-      </form>
+      </div>
+  </form>
 </div>

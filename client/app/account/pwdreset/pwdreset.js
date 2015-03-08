@@ -3,8 +3,12 @@
 angular.module('ludiicApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('pwdreset', {
+      .state('pwdresetwithcode', {
         url: '/pwdreset?code',
+        templateUrl: 'app/account/pwdreset/pwdreset.html',
+      })
+      .state('pwdreset', {
+        url: '/pwdreset',
         templateUrl: 'app/account/pwdreset/pwdreset.html',
       });
   });

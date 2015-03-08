@@ -1,20 +1,21 @@
 'use strict';
 
 angular.module('ludiicApp')
-  .controller('PasswordCtrl', function($scope, User, Auth) {
-    $scope.errors = {};
+  .controller('PasswordCtrl', function(User, Auth) {
+    var _this = this;
+    _this.errors = {};
 
-    $scope.changePassword = function(form) {
-      $scope.submitted = true;
+    _this.changePassword = function(form) {
+      _this.submitted = true;
       if (form.$valid) {
-        Auth.changePassword($scope.user.oldPassword, $scope.user.newPassword)
+        Auth.changePassword(_this.user.oldPassword, _this.user.newPassword)
           .then(function() {
-            $scope.message = 'Votre mot de passe a été changé avec sucès.';
+            _this.message = 'Votre mot de passe a été changé avec sucès.';
           })
           .catch(function() {
             form.password.$setValidity('mongoose', false);
-            $scope.errors.other = 'Mot de passe incorrect.';
-            $scope.message = '';
+            _this.errors.other = 'Mot de passe incorrect.';
+            _this.message = '';
           });
       }
     };

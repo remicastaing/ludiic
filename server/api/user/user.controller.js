@@ -239,7 +239,7 @@ exports.changeResetedPassword= function(req, res, next) {
           })
           .catch(validationError(res));
     })
-    .catch( handleError(res, 403) );
+    .catch( handleError(res, 400) );
 
 };
 

@@ -1,25 +1,31 @@
 <div class="row">
     <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="updateProfil(form)" novalidate>
+      <form class="form-horizontal" name="form" ng-submit="updateProfil(form)" novalidate>
 
-        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
-                                            'has-error': form.name.$invalid && submitted }">
-          <label>Nom</label>
 
-          <input type="text" name="name" class="form-control" ng-model="profil.name"
-                 required/>
-          <p class="help-block" ng-show="form.name.$error.required && submitted">
-            Un nom est nécessaire
-          </p>
+
+          <div class="form-group" ng-class="{ 'has-success': form.name.$valid && form.name.$touched,
+                                            'has-error': form.name.$invalid && form.name.$touched }">
+          <label for="name" class="col-sm-3 control-label">Nom</label>
+          <div class="col-sm-9">
+            <input id="name" type="text" name="name" class="form-control" ng-model="profil.name"
+                   required/>
+            <div ng-messages="form.name.$error" class="help-block"  ng-show="form.name.$touched">
+              <div ng-message="required">
+                Un nom est nécessaire.
+              </div>
+            </div>
+            </div>
         </div>
 
-
-
-        <div>
-          <button class="btn btn-inverse btn-lg btn-register" type="submit">
-            Sauvegarder
-          </button>
+        <div class="form-group">
+          <div class=" col-sm-9 col-sm-offset-3">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+              Sauvegarder
+            </button>
+          </div>
         </div>
+
 
       </form>
     </div>

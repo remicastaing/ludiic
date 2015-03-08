@@ -1,72 +1,78 @@
-<div class="row">
-    <div class="col-sm-12">
-      <h1>Créer un compte</h1>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="register(form)" novalidate>
+
+       <h1>Créer un compte</h1>
+
+
+      <form class="form-horizontal" name="form" ng-submit="register(form)" novalidate>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
-          <label>Nom</label>
-
-          <input type="text" name="name" class="form-control" ng-model="user.name"
-                 required/>
-          <p class="help-block" ng-show="form.name.$error.required && submitted">
-            Un nom est nécessaire
-          </p>
+          <label for="name" class="col-sm-3 control-label">Nom</label>
+          <div class="col-sm-9">
+            <input id="name" type="text" name="name" class="form-control" ng-model="user.name"
+                   required/>
+            <div ng-messages="form.name.$error" class="help-block"  ng-show="form.name.$touched">
+              <div ng-message="required">
+                Un nom est nécessaire.
+              </div>
+            </div>
+            </div>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
-                                            'has-error': form.email.$invalid && submitted }">
-          <label>Adresse mail</label>
+        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && form.email.$touched,
+                                            'has-error': form.email.$invalid && form.email.$touched }">
+          <label for="email" class="col-sm-3 control-label">Adresse mail</label>
 
-          <input type="email" name="email" class="form-control" ng-model="user.email"
-                 required
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.email.$error.email && submitted">
-            Cela ne ressemble pas à une adresse mail valide.
-          </p>
-          <p class="help-block" ng-show="form.email.$error.required && submitted">
-            Quelle est votre adresse mail?
-          </p>
-          <p class="help-block" ng-show="form.email.$error.mongoose">
-            {{ errors.email }}
-          </p>
+          <div class="col-sm-9">
+            <input id="email" type="email" name="email" class="form-control" ng-model="user.email" 
+                   required
+                   mongoose-error/>
+
+            <div ng-messages="form.email.$error" class="help-block"  ng-show="form.email.$touched">
+              <div ng-message="email">
+                Cela ne ressemble pas à une adresse mail valide.
+              </div>
+              <div ng-message="required">
+                Quelle est votre adresse mail?
+              </div>
+              <div ng-message="mongoose">
+                {{ errors.email }}
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
-                                            'has-error': form.password.$invalid && submitted }">
-          <label>Mot de passe</label>
+        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && form.password.$touched,
+                                            'has-error': form.password.$invalid && form.password.$touched }">
+          <label for="password" class="col-sm-3 control-label">Mot de passe</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.password"
-                 ng-minlength="3"
-                 required
-                 mongoose-error/>
-          <p class="help-block"
-             ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
-            Votre mot de passe doit faire plus de 3 caractères.
-          </p>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
-            {{ errors.password }}
-          </p>
+          <div class="col-sm-9">
+            <input id="password" type="password" name="password" class="form-control" ng-model="user.password"
+                   ng-minlength="3"
+                   required
+                   mongoose-error/>
+
+            <div ng-messages="form.password.$error" class="help-block"  ng-show="form.password.$touched">
+              <div ng-message="minlength">
+                Votre mot de passe doit faire plus de 3 caractères.
+              </div>
+              <div ng-message="required">
+                Un mot de passe est nécessaire.
+              </div>
+              <div ng-message="mongoose">
+                {{ errors.password }}
+              </div>
+            </div>
+          </div>  
         </div>
 
-        <div>
-          <button class="btn btn-primary btn-lg" type="submit">
-            Créer un compte
-          </button>
-          <a class="btn btn-default btn-lg btn-login" ui-sref="login">
-            Se connecter
-          </a>
+        <div class="form-group">
+          <div class=" col-sm-12">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+              Créer un compte
+            </button>
+          </div>
         </div>
-
-        <hr>
-        <div>
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-            <i class="fa fa-facebook"></i> Se connecter avec Facebook
-          </a>
-        </div>
+        
       </form>
-    </div>
-  </div>
-  <hr>
+
+

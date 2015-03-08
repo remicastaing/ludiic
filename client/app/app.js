@@ -3,8 +3,10 @@
 angular.module('ludiicApp', [
   'ngResource',
   'ngSanitize',
+  'ngMessages',
   'ui.router',
   'angular-storage',
+
 ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

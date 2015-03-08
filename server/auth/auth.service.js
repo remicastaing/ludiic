@@ -94,7 +94,7 @@ function verifyRequestToken(secret, enabled) {
     if (!req.query.token && (!req.body || !req.body.token)) { return res.status(401).send('no token supplied'); }
     var token = req.query.token || req.body.token;
     jwt.verify(token, secret, function(err, obj) {
-      if (err) { return res.status(401).send('there was an error with the supplied token'); }
+      if (err) { return res.status(400).send('there was an error with the supplied token'); }
       if (req.body) {
         delete req.body.token;
         console.log(obj);

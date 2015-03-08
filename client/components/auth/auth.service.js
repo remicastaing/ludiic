@@ -178,6 +178,7 @@ angular.module('ludiicApp')
         var value = (currentUser.hasOwnProperty('$promise')) ? currentUser.$promise : currentUser;
         return $q.when(value)
           .then(function(user) {
+            console.log(user);
             safeCb(callback)(user);
             return user;
           }, function() {

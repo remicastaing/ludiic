@@ -8,7 +8,9 @@ function localAuthenticate(User, email, password, done) {
     .then(function(user) {
       if (!user) {
         return done(null, false, {
-          message: 'This email is not registered.'
+          errorOn : 'email',
+          error: 'unknown',
+          message: 'Cette adresse email est inconnue.'
         });
       }
       user.authenticate(password, function(authError, authenticated) {
@@ -17,7 +19,9 @@ function localAuthenticate(User, email, password, done) {
         }
         if (!authenticated) {
           return done(null, false, {
-            message: 'This password is not correct.'
+            errorOn : 'password',
+            error: 'incorrect',
+            message: 'Le mot de passe est incorret.'
           });
         } else {
           return done(null, user);

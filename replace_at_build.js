@@ -16,8 +16,8 @@ module.exports = [
 	  replacement: 'script async src='
 	},
 	{
-		match: 'hjid:21388',
-		replacement: 'hjid:14237'
+		match: '21388',
+		replacement: '14237'
 	}
 	]
 
