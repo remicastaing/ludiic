@@ -1,5 +1,4 @@
-<div class="cookie-disclaimer text-center" ng-if="cookieDisclaimer.visible">En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies pour vous proposer des contenus et services adaptés à vos centres d’intérêts. <a ui-sref="donnees_personnelles">En savoir plus et gérer ces paramètres</a>.
-<button class="btn" ng-click = "cookieDisclaimer.close()" style="background-color: black;">
-<i class="fa fa-times "></i>
-</button>
+<div class="alert alert-warning alert-dismissible fade in" role="alert" ng-if="cookieDisclaimer.visible">
+  <button type="button" class="close" data-dismiss="alert" ng-click = "cookieDisclaimer.close()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de cookies pour vous proposer des contenus et services adaptés à vos centres d’intérêts. <a ui-sref="donnees_personnelles">En savoir plus et gérer ces paramètres</a>.
 </div>
