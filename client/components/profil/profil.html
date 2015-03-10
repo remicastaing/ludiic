@@ -1,32 +1,49 @@
 <div class="row">
-    <div class="col-sm-12">
-      <form class="form-horizontal" name="form" ng-submit="updateProfil(form)" novalidate>
+  <div class="col-sm-12">
+    <form class="form-horizontal" name="form" ng-submit="profilCtrl.updateProfil(form)" novalidate>
 
 
 
-          <div class="form-group" ng-class="{ 'has-success': form.name.$valid && form.name.$touched,
-                                            'has-error': form.name.$invalid && form.name.$touched }">
-          <label for="name" class="col-sm-3 control-label">Nom</label>
-          <div class="col-sm-9">
-            <input id="name" type="text" name="name" class="form-control" ng-model="profil.name"
-                   required/>
-            <div ng-messages="form.name.$error" class="help-block"  ng-show="form.name.$touched">
-              <div ng-message="required">
-                Un nom est nécessaire.
-              </div>
-            </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-          <div class=" col-sm-9 col-sm-offset-3">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">
-              Sauvegarder
-            </button>
+      <div class="form-group" ng-class="{ 'has-success': form.name.$valid && form.name.$touched,
+      'has-error': form.name.$invalid && form.name.$touched }">
+      <label for="name" class="col-sm-3 control-label">Nom</label>
+      <div class="col-sm-9">
+        <input id="name" type="text" name="name" class="form-control" ng-model="profilCtrl.profil.name"
+        required/>
+        <div ng-messages="form.name.$error" class="help-block"  ng-show="form.name.$touched">
+          <div ng-message="required">
+            Un nom est nécessaire.
           </div>
         </div>
-
-
-      </form>
+      </div>
     </div>
-  </div>
+
+    <div class="form-group" ng-class="{ 'has-success': form.name.$valid && form.name.$touched,
+      'has-error': form.name.$invalid && form.name.$touched }">
+      <label for="ville" class="col-sm-3 control-label">Ville</label>
+      <div class="col-sm-9">
+        <input id="ville" type="text" name="ville" class="form-control" ng-model="profilCtrl.profil.ville" g-places-autocomplete options="profilCtrl.autocompleteOptions"
+        required/>
+        <div ng-messages="form.ville.$error" class="help-block"  ng-show="form.ville.$touched">
+          <div ng-message="required">
+            Un nom est nécessaire.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h5>Result:</h5>
+            <pre>{{profilCtrl.profil.ville | json}}</pre>
+
+    <div class="form-group">
+      <div class=" col-sm-9 col-sm-offset-3">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">
+          Sauvegarder
+        </button>
+      </div>
+    </div>
+
+
+  </form>
+</div>
+</div>

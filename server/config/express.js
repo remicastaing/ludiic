@@ -28,15 +28,17 @@ module.exports = function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
   app.use(passport.initialize());
-  app.set('appPath', path.join(config.root, 'client'));
+  
 
   if ('production' === env) {
-    app.use(favicon(path.join(config.root, 'client', 'favicon.ico')));
-    app.use(express.static(app.get('appPath')));
+    app.set('appPath', path.join(config.root, 'apistatic'));
+    app.use(favicon(path.join(config.root, 'apistatic', 'favicon.ico')));
+    app.use(express.static(path.join(config.root, 'apistatic')));
     app.use(morgan('dev'));
   }
 
   if ('development' === env || 'test' === env) {
+    app.set('appPath', path.join(config.root, 'client'));
     app.use(require('connect-livereload')());
     app.use(express.static(path.join(config.root, '.tmp')));
     app.use(express.static(app.get('appPath')));

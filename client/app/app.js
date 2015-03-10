@@ -6,6 +6,7 @@ angular.module('ludiicApp', [
   'ngMessages',
   'ui.router',
   'angular-storage',
+  'google.places',
 
 ])
   .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {

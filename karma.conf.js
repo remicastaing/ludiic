@@ -22,6 +22,7 @@ module.exports = function(config) {
       'client/bower_components/lodash/dist/lodash.compat.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
       'client/bower_components/a0-angular-storage/dist/angular-storage.js',
+      'client/bower_components/angular-google-places-autocomplete/src/autocomplete.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',

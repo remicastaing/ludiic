@@ -402,7 +402,7 @@ module.exports = function (grunt) {
         options: {
           patterns: require("./replace_at_build"),
           usePrefix: false,
-          noProcess : ['<%= yeoman.dist %>/client/bower_components/**/*.*', '<%= yeoman.dist %>/client/**/*.png', '<%= yeoman.dist %>/client/**/*.ico', '<%= yeoman.dist %>/client/**/*.txt'], 
+          noProcess : ['<%= yeoman.dist %>/client/bower_components/**/*.*', '<%= yeoman.dist %>/client/**/*.png', '<%= yeoman.dist %>/client/**/*.ico', '<%= yeoman.dist %>/client/**/*.txt','<%= yeoman.dist %>/client/index.html'], 
         },
         files: [
           {expand: true, flatten: false, src: ['<%= yeoman.dist %>/client/**/*.*']}

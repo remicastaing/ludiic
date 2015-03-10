@@ -6,7 +6,9 @@ angular.module('ludiicApp')
       templateUrl: 'components/profil/profil.html',
       restrict: 'EA',
       controller: 'ProfilCtrl',
-      link: function (scope, element, attrs) {
-      }
+      controllerAs: 'profilCtrl',
+      bindToController: {
+	      profil: '='
+	    }
     };
   });

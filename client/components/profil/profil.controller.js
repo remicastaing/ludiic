@@ -1,31 +1,39 @@
 'use strict';
 
 angular.module('ludiicApp')
-  .controller('ProfilCtrl', function ($scope, Auth) {
-    $scope.message = 'Hello';
+  .controller('ProfilCtrl', function (Auth) {
+    var vm = this;
+    vm.profil = {};
     Auth.getCurrentUser(function(profil){
-      $scope.profil = JSON.parse(JSON.stringify(profil));
+      vm.profil = JSON.parse(JSON.stringify(profil));
     });
-    $scope.user = Auth.getCurrentUser();
 
-    $scope.updateProfil = function(form) {
-      $scope.submitted = true;
+    vm.profil.ville = null;
+    vm.autocompleteOptions = {
+                        componentRestrictions: { country: 'fr' },
+                        types: ['(cities)']
+                    }
+
+    vm.user = Auth.getCurrentUser();
+
+    vm.updateProfil = function(form) {
+      vm.submitted = true;
 
       if (form.$valid) {
         Auth.updateProfil({
-          name: $scope.profil.name,
+          name: vm.profil.name,
         })
         .then(function() {
-          $scope.user = Auth.refreshCurrentUser();
+          vm.user = Auth.refreshCurrentUser();
 
         })
         .catch(function(err) {
-          $scope.errors = {};
+          vm.errors = {};
 
           // Update validity of form fields that match the mongoose errors
           angular.forEach(err.errors, function(error, field) {
             form[field].$setValidity('mongoose', false);
-            $scope.errors[field] = error.message;
+            vm.errors[field] = error.message;
           });
         });
       }
