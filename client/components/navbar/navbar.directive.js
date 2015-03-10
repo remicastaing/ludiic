@@ -6,6 +6,7 @@ angular.module('ludiicApp')
       templateUrl: 'components/navbar/navbar.html',
       restrict: 'EA',
       controller: 'NavbarCtrl',
+      controllerAs: 'navbar',
       link: function (scope, element, attrs) {
       }
     };
