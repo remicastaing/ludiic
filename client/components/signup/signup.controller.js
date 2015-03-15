@@ -16,7 +16,7 @@ angular.module('ludiicApp')
         })
         .then(function() {
           // Account created, redirect to home
-          $state.go('main');
+          $state.go('welcome');
         })
         .catch(function(err) {
           $scope.errors = {};
