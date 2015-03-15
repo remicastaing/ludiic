@@ -2,7 +2,7 @@
 
 angular.module('ludiicApp')
   .factory('User', function ($resource) {
-    return $resource('/api/users/:id/:controller', {
+    return $resource('http://localhost:9000/api/users/:id/:controller', {
       id: '@_id'
     },
     {

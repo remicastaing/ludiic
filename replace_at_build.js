@@ -4,12 +4,8 @@ module.exports = [
 	  replacement: 'UA-58058140-1'
 	},
 	{
-		match: '/api/',
-	  replacement: 'http://api.ludiic.fr/api/'
-	},
-	{
-		match: '/auth/',
-	  replacement: 'http://api.ludiic.fr/auth/'
+		match: 'http://localhost:9000',
+	  replacement: 'http://api.ludiic.fr'
 	},
 		{
 		match: 'script src=',
