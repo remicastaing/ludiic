@@ -5,14 +5,11 @@ describe('Controller: CGUCtrl', function () {
   // load the controller's module
   beforeEach(module('ludiicApp'));
 
-  var CGUCtrl, scope;
+  var CGUCtrl;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    CGUCtrl = $controller('CGUCtrl', {
-      $scope: scope
-    });
+  beforeEach(inject(function ($controller) {
+    CGUCtrl = $controller('CGUCtrl', {});
   }));
 
   it('should ...', function () {

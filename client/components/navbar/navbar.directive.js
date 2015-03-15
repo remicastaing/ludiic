@@ -7,7 +7,5 @@ angular.module('ludiicApp')
       restrict: 'EA',
       controller: 'NavbarCtrl',
       controllerAs: 'navbar',
-      link: function (scope, element, attrs) {
-      }
     };
   });

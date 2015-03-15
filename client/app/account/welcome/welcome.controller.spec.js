@@ -5,14 +5,11 @@ describe('Controller: WelcomeCtrl', function () {
   // load the controller's module
   beforeEach(module('ludiicApp'));
 
-  var WelcomeCtrl, scope;
+  var WelcomeCtrl;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    WelcomeCtrl = $controller('WelcomeCtrl', {
-      $scope: scope
-    });
+  beforeEach(inject(function ($controller) {
+    WelcomeCtrl = $controller('WelcomeCtrl', {});
   }));
 
   it('should ...', function () {

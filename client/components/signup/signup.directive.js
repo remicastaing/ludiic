@@ -6,7 +6,5 @@ angular.module('ludiicApp')
       templateUrl: 'components/signup/signup.html',
       restrict: 'EA',
       controller : 'SignupCtrl',
-      link: function (scope, element, attrs) {
-      }
     };
   });

@@ -5,14 +5,12 @@ describe('Controller: ConfirmCtrl', function () {
   // load the controller's module
   beforeEach(module('ludiicApp'));
 
-  var ConfirmCtrl, scope;
+  var ConfirmCtrl;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ConfirmCtrl = $controller('ConfirmCtrl', {
-      $scope: scope
-    });
+    ConfirmCtrl = $controller('ConfirmCtrl', {});
   }));
 
   // it('should ...', function () {

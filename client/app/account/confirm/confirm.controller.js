@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('ludiicApp')
-  .controller('ConfirmCtrl', function ($scope, Auth, $state, $stateParams) {
-    $scope.errors = {};
-    $scope.isLoggedIn = Auth.isLoggedIn;
+  .controller('ConfirmCtrl', function (Auth, $state, $stateParams) {
+    var vm = this;
+    vm.errors = {};
+    vm.isLoggedIn = Auth.isLoggedIn;
 
 
     if ($stateParams.token) {
@@ -14,7 +15,7 @@ angular.module('ludiicApp')
           $state.path('main');
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          vm.errors.other = err.message;
         });
     }
 
