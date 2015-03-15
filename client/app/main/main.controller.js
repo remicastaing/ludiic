@@ -1,22 +1,26 @@
 'use strict';
 
 angular.module('ludiicApp')
-  .controller('MainCtrl', function($scope, $http) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function($http, Auth) {
+    var vm = this;
+
+    vm.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+      vm.awesomeThings = awesomeThings;
     });
 
-    $scope.addThing = function() {
-      if ($scope.newThing === '') {
+    vm.addThing = function() {
+      if (vm.newThing === '') {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+      $http.post('/api/things', { name: vm.newThing });
+      vm.newThing = '';
     };
 
-    $scope.deleteThing = function(thing) {
+    vm.deleteThing = function(thing) {
       $http.delete('/api/things/' + thing._id);
     };
+
+    vm.isLoggedIn = Auth.isLoggedIn;
   });
