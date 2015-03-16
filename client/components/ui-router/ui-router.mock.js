@@ -31,4 +31,8 @@ angular.module('stateMock').service('$state', function($q) {
             throw Error('Not all transitions happened!');
         }
     };
+
+    this.get = function(stateName) {
+        return {};
+    }
 });

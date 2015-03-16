@@ -13,11 +13,12 @@ describe('Controller: MainCtrl', function() {
   // Initialize the controller and a mock scope
   beforeEach(inject(function(_$httpBackend_, $controller,  $state) {
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things')
+    $httpBackend.expectGET('api/things')
       .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
  
     state = $state;
+
     MainCtrl = $controller('MainCtrl', {});
   }));
 

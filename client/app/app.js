@@ -7,9 +7,10 @@ angular.module('ludiicApp', [
   'ui.router',
   'angular-storage',
   'google.places',
+  'angulartics.google.analytics',
 
 ])
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $analyticsProvider) {
     $urlRouterProvider
       .otherwise('/');
 
@@ -18,6 +19,8 @@ angular.module('ludiicApp', [
     $httpProvider.defaults.withCredentials = true;
 
     $httpProvider.interceptors.push('authInterceptor');
+
+    //$analyticsProvider.virtualPageviews(false);
 
   })
 

@@ -63,7 +63,7 @@ angular.module('ludiicApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/api/users/', user).
+        $http.post('api/users/', user).
         success(function(data) {
           ludiicStore.set('token', data.token);
           currentUser = User.get();

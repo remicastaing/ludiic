@@ -1,11 +1,11 @@
 module.exports = [
 	{
-		match: 'UA-XXXXX-X',
+		match: 'UA-58058140-2',
 	  replacement: 'UA-58058140-1'
 	},
 	{
-		match: 'http://localhost:9000',
-	  replacement: 'http://api.ludiic.fr'
+		match: '\"api',
+	  replacement: '\"http://api.ludiic.fr/api'
 	},
 		{
 		match: 'script src=',
